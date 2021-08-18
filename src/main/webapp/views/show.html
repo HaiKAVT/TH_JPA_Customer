@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>JPA-Customer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+
+  <h2  style="background-color:DodgerBlue; text-align:center;">Show Customer</h2>
+  <a href="/create" class="btn btn-success">Create</a>
+
+  <form action="/customer" method="get">
+    <input type="text" class="form-control" placeholder="search" name="findName">
+    <input type="text" hidden name="action" value="findName">
+    <button type="submit" class="btn btn-success">Find</button>
+  </form>
+  <table class="table">
+    <thead style="background-color:SlateBlue;">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer,loop:${list}">
+      <td th:text="${customer.id}"></td>
+      <td th:text="${customer.name}"></td>
+      <td th:text="${customer.email}"></td>
+      <td th:text="${customer.address}"></td>
+      <td><a th:href="@{/edit/{index}(index = ${loop.index})}" class="btn btn-warning">Edit</a>
+      <a th:href="@{/delete/{index}(index = ${loop.index})}" class="btn btn-danger">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
